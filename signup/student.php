@@ -1,6 +1,45 @@
 <?php
 session_start();
 include_once("../includes/connect.php");
+include_once("../includes/data.php");
+$data = new Data;
+
+if (isset($_POST['signup'])) {
+  $fname = $_POST['fname'];
+  $lname = $_POST['lname'];
+  $uname = $_POST['uname'];
+  $pwd = $_POST['pwd'];
+  $cpwd = $_POST['cpwd'];
+
+  $time = time();
+
+  $auth_key = md5(md5($uname));
+
+  $user_exists = $data->userExists($uname);
+
+  if (empty($fname) || empty($lname) || empty($uname) || empty($pwd) || empty($cpwd)) {
+    $error = "All Fields Must Be Filled";
+  } else if ($pwd != $cpwd) {
+    $error = "Passwords Must Match";
+  } else if ($user_exists) {
+    $error = "This Username Already Exists, Please Create A New Username";
+  } else {
+    $query = $pdo->prepare("INSERT INTO user (username, firstname, lastname, roleid, status, auth_key, password_hash, password_reset_token, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query->bindValue(1, $uname);
+    $query->bindValue(2, $fname);
+    $query->bindValue(3, $lname);
+    $query->bindValue(4, 5);
+    $query->bindValue(5, 0);
+    $query->bindValue(6, $auth_key);
+    $query->bindValue(7, md5($pwd));
+    $query->bindValue(8, "not set yet");
+    $query->bindValue(9, $time);
+    $query->bindValue(10, $time);
+
+    $query->execute();
+  }
+}
+
 ?>
 <html>
 <head>
@@ -18,52 +57,26 @@ include_once("../includes/connect.php");
     <a href="index.php">Sign Up</a>
     <a href="../login.php">Log In</a>
   </div>
-  <form>
-    <h1>Student Sign Up</h1>
-        <div class="form-group field-signupform-firstname required">
-        <label class="control-label" for="signupform-firstname">First Name</label>
-        <input type="text" id="signupform-firstname" placeholder="First Name..."class="form-control"
-        name="StudentSignupForm[firstname]" autofocus aria-required="true">
-
-        <p class="help-block help-block-error"></p>
-        </div>
-        <div class="form-group field-signupform-lastname required">
-        <label class="control-label" for="signupform-lastname">Last Name</label>
-        <input type="text" id="signupform-lastname" placeholder="Last Name..." class="form-control"
-        name="StudentSignupForm[lastname]" aria-required="true">
-
-        <p class="help-block help-block-error"></p>
-        </div>
-        <div class="form-group field-signupform-username required">
-    <label class="control-label" for="signupform-username">Username</label>
-    <input type="text" id="signupform-username" placeholder="Username..." class="form-control"
-    name="StudentSignupForm[username]" aria-required="true">
-
-    <p class="help-block help-block-error"></p>
+  <div class="grid-2-1">
+    <div class="grid-column-1 grid-row-1">
+      <form action="student.php" method="post" class="padding-30">
+        <h1 class="subheading">Student Sign Up</h1>
+        <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" placeholder="First Name...">
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" placeholder="Last Name...">
+        <br><br>
+        <label for="uname">Username</label>
+        <input type="text" name="uname" placeholder="Username...">
+        <label for="pwd">Password</label>
+        <input type="password" name="pwd" placeholder="Password...">
+        <label for="cpwd">Confirm Password</label>
+        <input type="password" name="cpwd" placeholder="Confirm Password...">
+        <br><br>
+        <input type="submit" name="signup" value="Sign Up" class="btn bg-blue hover:bg-green text-light text-12">
+      </form>
     </div>
-                <div class="form-group field-signupform-password required">
-    <label class="control-label" for="signupform-password">Password</label>
-    <input type="password" id="signupform-password" placeholder="Password..." class="form-control"
-    name="StudentSignupForm[password]" aria-required="true">
-
-    <p class="help-block help-block-error"></p>
-    </div>
-                <div class="form-group field-signupform-password required">
-    <label class="control-label" for="signupform-password">Confirm Password</label>
-    <input type="password" id="signupform-password-Confirm" placeholder="Password..." class="form-control"
-     name="StudentSignupForm[passwordConfirm]" aria-required="true">
-
-    <p class="help-block help-block-error"></p>
-    </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="signup-button">Signup</button>            </div>
-    <b>Username</b><br><br>
-    <input type="text" name="username" placeholder="Username..."><br><br>
-    <b>Password</b><br><br>
-    <input type="password" name="password" placeholder="Password..."><br><br>
-    <b>Confirm Password</b><br><br>
-    <input type="cpassword" name="password" placeholder="Password..."><br><br>
-  </form>
+  </div>
 </body>
 </html>
