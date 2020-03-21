@@ -65,8 +65,8 @@ if (isset($_POST['signup'])) {
     <a href="index.php">Sign Up</a>
     <a href="../login.php">Log In</a>
   </div>
-  <div class="grid-2-1">
-    <div class="grid-column-1 grid-row-1">
+  <div class="grid-2-1 phone-grid-1-1">
+    <div class="grid-column-1 grid-row-1 phone-grid-column-1 phone-grid-row-1">
       <form action="parent.php" method="post" class="padding-30">
         <h1 class="subheading">Parent Sign Up</h1>
         <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
@@ -87,9 +87,9 @@ if (isset($_POST['signup'])) {
         <input type="submit" name="signup" value="Sign Up" class="btn bg-blue hover:bg-green text-light text-12">
       </form>
     </div>
-    <div class="grid-column-2 grid-row-1 text-center">
+    <div class="grid-column-2 grid-row-1 text-center phone-grid-column-1 phone-grid-row-1 tablet-hidden">
       <br><br>
-      <img src="../images/parentprofile.svg" class="w-90">
+      <img src="../images/parentprofile.svg" class="w-90 phone-hidden">
     </div>
   </div>
 </body>

@@ -25,8 +25,12 @@ if (isset($_SESSION['logged_in'])) {
   <div class="navbar bg-dark text-light">
     <a href="#">Home</a>
     <div class="right-links">
-      <a href="signup">Sign Up</a>
-      <a href="login.php">Log In</a>
+      <?php if (isset($_SESSION['user_id'])) { ?>
+        <a href="account">Account</a>
+      <?php } else { ?>
+        <a href="signup">Sign Up</a>
+        <a href="login.php">Log In</a>
+      <?php } ?>
     </div>
   </div>
   <div class="heroImage h-50 full-width padding-30 bg-dark text-light">

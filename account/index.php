@@ -1,5 +1,14 @@
-display account information
+<?php
+session_start();
+include_once("../includes/connect.php");
+include_once("../includes/data.php");
 
-for teachers show assignments and grades
+if (isset($_SESSION['user_id'])) {
+  ?>
 
-for parents show family members and teachers and grades
+  <?php
+} else {
+  header("Location: ../login.php");
+  exit();
+}
+?>

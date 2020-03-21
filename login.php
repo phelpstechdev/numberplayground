@@ -45,6 +45,7 @@ if (isset($_POST['login'])) {
       <form action="login.php" method="post">
         <h1>Log In</h1>
         <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
+        <div class="padding-10"></div>
         <label for="username">Username</label>
         <input name="username" type="text" placeholder="Username...">
         <label for="password">Password</label>
@@ -52,5 +53,10 @@ if (isset($_POST['login'])) {
         <br><br>
         <input type="submit" name="login" value="Log In" class="btn bg-blue text-light hover:bg-green">
       </form>
+    </div>
+    <div class="grid-column-2 grid-row-1">
+      <img src="images/studentprofile.svg" class="w-90">
+    </div>
+  </div>
 </body>
 </html>
