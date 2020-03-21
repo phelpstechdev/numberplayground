@@ -24,6 +24,7 @@ if (isset($_POST['signup'])) {
   } else if ($user_exists) {
     $error = "This Username Already Exists, Please Create A New Username";
   } else {
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query = $pdo->prepare("INSERT INTO user (username, firstname, lastname, roleid, status, auth_key, password_hash, password_reset_token, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $query->bindValue(1, $uname);
     $query->bindValue(2, $fname);
@@ -76,6 +77,10 @@ if (isset($_POST['signup'])) {
         <br><br>
         <input type="submit" name="signup" value="Sign Up" class="btn bg-blue hover:bg-green text-light text-12">
       </form>
+    </div>
+    <div class="grid-column-2 grid-row-1 text-center">
+      <br><br>
+      <img src="../images/studentprofile.svg" class="w-90">
     </div>
   </div>
 </body>

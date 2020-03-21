@@ -17,6 +17,16 @@ class Data {
     }
 
   }
+
+  public function getUserInfo($id) {
+    global $pdo;
+
+    $query = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+    $query->bindValue(1, $id);
+    $query->execute();
+
+    return $query->fetch();
+  }
 }
 
  ?>
