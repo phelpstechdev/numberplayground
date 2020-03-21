@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>Number Playground | Sign Up</title>
-  <link rel="stylesheet" href="../../../atomic-docs/css/main.css">
+  <link rel="stylesheet" href="../assets/main.css">
   <style>
   * {
     font-family: Arial;

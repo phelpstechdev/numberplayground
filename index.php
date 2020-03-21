@@ -6,7 +6,7 @@ include_once("includes/connect.php");
 <head>
   <title>Number Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../atomic-docs/css/main.css">
+  <link rel="stylesheet" href="assets/main.css">
   <style>
   * {
     font-family: Arial;
