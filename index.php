@@ -7,6 +7,11 @@ include_once("includes/connect.php");
   <title>Number Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../atomic-docs/css/main.css">
+  <style>
+  * {
+    font-family: Arial;
+  }
+  </style>
 </head>
 <body>
   <div class="navbar bg-dark text-light">

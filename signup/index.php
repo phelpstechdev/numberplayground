@@ -2,31 +2,39 @@
 <head>
   <title>Number Playground | Sign Up</title>
   <link rel="stylesheet" href="../../../atomic-docs/css/main.css">
+  <style>
+  * {
+    font-family: Arial;
+  }
+  </style>
 </head>
 <body>
+  <div class="navbar bg-dark">
+    <a href="../index.php">Home</a>
+  </div>
   <div class="padding-30">
     <h1 class="text-center">Are you a...</h1>
     <div class="grid-3-1 grid-gap-20">
-      <div class="grid-column-1 grid-row-1 padding-30 bg-red text-light text-center">
+      <a href="student.php" class="no-text-decoration"><div class="grid-column-1 grid-row-1 padding-30 bg-red text-light text-center">
         <div class="grid-1-3">
           <div class="grid-column-1 grid-row-2">
             <h1 class="subtitle">Student</h1>
           </div>
         </div>
-      </div>
-      <div class="grid-column-2 grid-row-1 padding-30 bg-green text-light text-center">
+      </div></a>
+      <a href="parent.php" class="no-text-decoration"><div class="grid-column-2 grid-row-1 padding-30 bg-green text-light text-center">
         <div class="grid-1-3">
           <div class="grid-column-1 grid-row-2">
             <h1 class="subtitle">Parent</h1>
           </div>
         </div>
-      </div>
-      <div class="grid-column-3 grid-row-1 padding-30 bg-blue text-light text-center">
+      </div></a>
+      <a href="teacher.php" class="no-text-decoration"><div class="grid-column-3 grid-row-1 padding-30 bg-blue text-light text-center">
         <div class="grid-1-3">
           <div class="grid-column-1 grid-row-2">
-            <h1 class="subtitle">Teacher</h1>
+            <h1 class="subtitle text-light">Teacher</h1>
           </div>
-        </div>
+        </div></a>
       </div>
     </div>
   </div>
