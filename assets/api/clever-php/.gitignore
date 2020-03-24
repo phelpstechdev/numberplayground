@@ -1,0 +1,8 @@
+.DS_Store
+/test/simpletest/
+/vendor/
+*~
+
+.swagger-codegen/
+.travis.yml
+git_push.sh

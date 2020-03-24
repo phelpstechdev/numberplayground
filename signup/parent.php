@@ -87,7 +87,7 @@ if (isset($_POST['signup'])) {
         <input type="submit" name="signup" value="Sign Up" class="btn bg-blue hover:bg-green text-light text-12">
       </form>
     </div>
-    <div class="grid-column-2 grid-row-1 text-center phone-grid-column-1 phone-grid-row-1 tablet-hidden">
+    <div class="grid-column-2 grid-row-1 text-center phone-grid-column-1 phone-grid-row-1 phone-hidden">
       <br><br>
       <img src="../images/parentprofile.svg" class="w-90 phone-hidden">
     </div>
