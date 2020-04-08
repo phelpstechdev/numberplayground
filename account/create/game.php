@@ -12,36 +12,36 @@ if (isset($_SESSION['user_id'])) {
 
   if (isset($_POST['create'])) {
     $name = $_POST['name'];
-    $description = $_POST['description'];
-    $startdate = strtotime($_POST['startdate']);
-    $enddate = strtotime($_POST['enddate']);
-    $joincode = substr(md5(uniqid()), -5);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query = $pdo->prepare("INSERT INTO course (fullname, summary, startdate, enddate, creator_id, join_code) VALUES (?, ?, ?, ?, ?, ?)");
-    $query->bindValue(1, $name);
-    $query->bindValue(2, $description);
-    $query->bindValue(3, $startdate);
-    $query->bindValue(4, $enddate);
-    $query->bindValue(5, $_SESSION['user_id']);
-    $query->bindValue(6, $joincode);
-    $query->execute();
+    $domain = $_POST['domain'];
+    $class = $_POST['class'];
+    $javascriptFile = $_FILES['javascriptFile'];
+    $imageFile = $_FILES['imageFile'];
+    $jF_upload = $data->uploadFile($javascriptFile);
+    $iF_upload = $data->uploadFile($imageFile);
 
-    $course_id = $pdo->lastInsertId();
+    echo $name;
+    echo $class;
 
-    $query = $pdo->prepare("INSERT INTO user_course (user_id, course_id) VALUES (?, ?)");
-    $query->bindValue(1, $_SESSION['user_id']);
-    $query->bindValue(2, $course_id);
-    $query->execute();
+    if ($jF_upload != "Failure" && $iF_upload != "Failure") {
 
-    header("Location: ../index.php");
-    exit();
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      $query = $pdo->prepare("INSERT INTO game (name, class_id, domain_id, javascript, image) VALUES(?, ?, ?, ?, ?)");
+      $query->bindValue(1, $name);
+      $query->bindValue(2, $class);
+      $query->bindValue(3, $domain);
+      $query->bindValue(4, basename($jF_upload));
+      $query->bindValue(5, basename($iF_upload));
+      $query->execute();
+
+    }
 
   }
 
 ?>
 <html>
 <head>
-  <title>Number Playground | Create A Course</title>
+  <title>Number Playground | Create A Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../assets/main.css">
   <style>
@@ -86,19 +86,49 @@ if (isset($_SESSION['user_id'])) {
       </div>
       <div class="grid-10-10">
         <div class="card grid-column-2-9 grid-row-2-9 bg-light text-dark">
-          <form action="course.php" method="post" class="padding-30">
-            <h1 class="subheading">Create A Course</h1>
+          <form action="game.php" method="post" class="padding-30" enctype="multipart/form-data">
+            <h1 class="subheading">Create A Game</h1>
             <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
-            <label for="name">Course Name</label>
-            <input type="text" name="name" placeholder="First Name...">
-            <label for="description">Course Description</label>
-            <textarea name="description" placeholder="5th Grade Class.."></textarea>
-            <label for="startdate">Start Date</label>
-            <input type="date" name="startdate">
-            <label for="enddate">End Date</label>
-            <input type="date" name="enddate">
+            <label for="name">Game Name</label>
+            <input type="text" name="name" placeholder="Game Name...">
+            <label for="class">Class</label>
+            <select name="class">
+              <?php
+
+              $classes = $data->getClasses();
+
+              foreach ($classes as $class) {
+
+                ?>
+                <option value="<?php echo $class['id']; ?>"><?php echo $class['class']; ?></option>
+                <?php
+
+              }
+
+               ?>
+            </select>
+            <label for="domain">Domain</label>
+            <select name="domain">
+              <?php
+
+              $domains = $data->getDomains();
+
+              foreach ($domains as $domain) {
+
+                ?>
+                <option value="<?php echo $domain['id']; ?>"><?php echo $domain['domain']; ?></option>
+                <?php
+
+              }
+
+               ?>
+            </select>
+            <label for="javascriptFile">Javascript File</label>
+            <input type="file" name="javascriptFile">
+            <label for="imageFile">Thumbnail Image</label>
+            <input type="file" name="imageFile">
             <br><br>
-            <input type="submit" name="create" value="Create Course" class="btn bg-blue hover:bg-green text-light text-12">
+            <input type="submit" name="create" value="Create Game" class="btn bg-blue hover:bg-green text-light text-12">
           </form>
         </div>
       </div>

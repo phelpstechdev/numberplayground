@@ -4,6 +4,8 @@ include_once("includes/connect.php");
 include_once("includes/data.php");
 $data = new Data;
 
+$games = $data->getGames();
+
 if (isset($_SESSION['logged_in'])) {
   $user = $data->getUserInfo($_SESSION['user_id']);
 } else {
@@ -36,12 +38,25 @@ if (isset($_SESSION['logged_in'])) {
   <div class="heroImage h-50 full-width padding-30 bg-dark text-light">
     <h1 class="title text-center">Welcome, <?php echo $user['firstname']; ?>!</h1>
   </div>
-  <div class="grid-5-1 padding-30 grid-gap-20">
-    <div class="grid-column-1 grid-row-1">
-      <div class="card bg-blue text-light padding-30">
-        <p>No games.</p>
+  <div class="grid-5-auto padding-30 grid-gap-20">
+
+    <?php
+
+    foreach($games as $game) {
+
+      ?>
+      <div class="bg-dark text-light">
+        <img src="images/<?php echo $game['image']; ?>" class="full-width" style="height: 150px; object-fit: cover;">
+        <div class="padding-30">
+          <h3><?php echo $game['name']; ?>
+        </div>
       </div>
-    </div>
+      <?php
+
+    }
+
+     ?>
+
   </div>
 </body>
 </html>
