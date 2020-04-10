@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>Number Playground | Confirm Email</title>
-  <link rel="stylesheet" href="../../assets/main.css">
+  <link rel="stylesheet" href="../assets/main.css">
   <style>
   * {
     font-family: Arial;
@@ -18,7 +18,7 @@
             <p>We have sent you an email to confirm your email.</p>
           </div>
           <div class="grid-column-2 grid-row-1 phone-grid-row-2 phone-grid-column-1-2 text-center">
-            <img src="../../images/mailsent.svg" class="w-80">
+            <img src="../images/mailsent.svg" class="w-80">
           </div>
         </div>
       </div>

@@ -280,6 +280,14 @@ class Data {
           box-sizing: border-box;
         }
 
+        .button a {
+          color: #ffffff;
+        }
+
+        a.button {
+          color: #ffffff;
+        }
+
         .button--green {
           background-color: #22BC66;
           border-top: 10px solid #22BC66;
@@ -711,6 +719,14 @@ class Data {
 
     a {
       color: #3869D4;
+    }
+
+    .button a {
+      color: #ffffff;
+    }
+
+    a.button {
+      color: #ffffff;
     }
 
     a img {

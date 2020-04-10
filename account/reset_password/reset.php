@@ -28,8 +28,10 @@ if (isset($_POST['resetpassword'])) {
 
   if ($newpassword == $confirmpassword) {
 
+    $password_hash = password_hash($newpassword, PASSWORD_DEFAULT);
+
     $query = $pdo->prepare("UPDATE user set password_hash = ?, updated_at = ? WHERE id = ?");
-    $query->bindValue(1, md5($newpassword));
+    $query->bindValue(1, $password_hash);
     $query->bindValue(2, $time);
     $query->bindValue(3, $id);
     $query->execute();

@@ -14,8 +14,6 @@ if (isset($_POST['signup'])) {
 
   $time = time();
 
-  $auth_key = md5(md5($uname));
-
   $user_exists = $data->userExists($uname);
 
   if (empty($fname) || empty($lname) || empty($uname) || empty($pwd) || empty($cpwd) || empty($email)) {
@@ -27,6 +25,10 @@ if (isset($_POST['signup'])) {
   } else {
 
     $password_hash = password_hash($pwd, PASSWORD_DEFAULT);
+
+    $auth_key = md5(md5($uname));
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $query = $pdo->prepare("INSERT INTO user (username, firstname, lastname, roleid, status, auth_key, password_hash, password_reset_token, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $query->bindValue(1, $uname);
@@ -47,6 +49,13 @@ if (isset($_POST['signup'])) {
     $query->bindValue(1, $lastID);
     $query->bindValue(2, $email);
     $query->execute();
+
+    $confirm_link = $auth_key;
+
+    $data->sendConfirmEmail($auth_key, $email, $fname, $lname);
+
+    header("Location: confirm.php");
+    exit();
 
   }
 }
