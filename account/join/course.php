@@ -10,27 +10,18 @@ if (isset($_SESSION['user_id'])) {
   $role = $data->getRole($user['roleid']);
   $courses = $data->getUserCourses($user['id']);
 
-  if (isset($_POST['create'])) {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $startdate = strtotime($_POST['startdate']);
-    $enddate = strtotime($_POST['enddate']);
-    $joincode = substr(md5(uniqid()), -5);
+  if (isset($_POST['join'])) {
+    $code = $_POST['code'];
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query = $pdo->prepare("INSERT INTO course (fullname, summary, startdate, enddate, creator_id, join_code) VALUES (?, ?, ?, ?, ?, ?)");
-    $query->bindValue(1, $name);
-    $query->bindValue(2, $description);
-    $query->bindValue(3, $startdate);
-    $query->bindValue(4, $enddate);
-    $query->bindValue(5, $_SESSION['user_id']);
-    $query->bindValue(6, $joincode);
+    $query = $pdo->prepare("SELECT * FROM course WHERE join_code = ?");
+    $query->bindValue(1, $code);
     $query->execute();
 
-    $course_id = $pdo->lastInsertId();
+    $course = $query->fetch(PDO::FETCH_ASSOC);
 
     $query = $pdo->prepare("INSERT INTO user_course (user_id, course_id) VALUES (?, ?)");
     $query->bindValue(1, $_SESSION['user_id']);
-    $query->bindValue(2, $course_id);
+    $query->bindValue(2, $course['id']);
     $query->execute();
 
     header("Location: ../index.php");
@@ -41,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
 ?>
 <html>
 <head>
-  <title>Number Playground | Create A Course</title>
+  <title>Number Playground | Join A Course</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../assets/main.css">
   <style>
@@ -87,18 +78,12 @@ if (isset($_SESSION['user_id'])) {
       <div class="grid-10-10">
         <div class="card grid-column-2-9 grid-row-2-9 bg-light text-dark">
           <form action="course.php" method="post" class="padding-30">
-            <h1 class="subheading">Create A Course</h1>
+            <h1 class="subheading">Join A Course</h1>
             <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
-            <label for="name">Course Name</label>
-            <input type="text" name="name" placeholder="First Name...">
-            <label for="description">Course Description</label>
-            <textarea name="description" placeholder="5th Grade Class.."></textarea>
-            <label for="startdate">Start Date</label>
-            <input type="date" name="startdate">
-            <label for="enddate">End Date</label>
-            <input type="date" name="enddate">
+            <label for="code">Course Join Code</label>
+            <input type="text" name="code" placeholder="Join Code...">
             <br><br>
-            <input type="submit" name="create" value="Create Course" class="btn bg-blue hover:bg-green text-light text-12">
+            <input type="submit" name="join" value="Join Course" class="btn bg-blue hover:bg-green text-light text-12">
           </form>
         </div>
       </div>
