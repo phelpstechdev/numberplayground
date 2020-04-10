@@ -61,11 +61,8 @@ if (isset($_POST['signup'])) {
   </style>
 </head>
 <body>
-  <div class="navbar bg-dark text-light">
-    <a href="../index.php">Account</a>
-  </div>
-  <div class="grid-2-1 phone-grid-1-1">
-    <div class="grid-column-1 grid-row-1 phone-grid-column-1 phone-grid-row-1">
+  <div class="grid-2-1 phone-grid-1-1 full-height overflow-auto">
+    <div class="grid-column-1 grid-row-1 bg-dark text-light phone-grid-column-1 phone-grid-row-1">
       <form action="teacher.php" method="post" class="padding-30">
         <h1 class="subheading">Teacher Sign Up</h1>
         <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
@@ -84,11 +81,16 @@ if (isset($_POST['signup'])) {
         <input type="password" name="cpwd" placeholder="Confirm Password...">
         <br><br>
         <input type="submit" name="signup" value="Sign Up" class="btn bg-blue hover:bg-green text-light text-12">
+        <br><br>
+        <a href="../login.php" class="text-blue no-text-decoration">Already Have An Account? Sign In!</a>
       </form>
     </div>
     <div class="grid-column-2 grid-row-1 text-center phone-grid-column-1 phone-grid-row-1 phone-hidden">
-      <br><br>
-      <img src="../images/teacherprofile.svg" class="w-90 phone-hidden">
+      <div class="grid-1-4">
+        <div class="grid-row-2-3">
+          <img src="../images/teacherprofile.svg" class="w-90 phone-hidden" style="align-self: center; justify-self: center;">
+        </div>
+      </div>
     </div>
   </div>
 </body>
