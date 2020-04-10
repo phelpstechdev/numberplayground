@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/goleuwupz58z/public_html/numberplayground/
-    - /bin/cp -R numberplayground $DEPLOYPATH
+    - /bin/cp -R $DEPLOYPATH
