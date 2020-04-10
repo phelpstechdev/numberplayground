@@ -25,6 +25,9 @@ if (isset($_POST['signup'])) {
   } else if ($user_exists) {
     $error = "This Username Already Exists, Please Create A New Username";
   } else {
+
+    $password_hash = password_hash($pwd, PASSWORD_DEFAULT);
+
     $query = $pdo->prepare("INSERT INTO user (username, firstname, lastname, roleid, status, auth_key, password_hash, password_reset_token, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $query->bindValue(1, $uname);
     $query->bindValue(2, $fname);
@@ -32,7 +35,7 @@ if (isset($_POST['signup'])) {
     $query->bindValue(4, 4);
     $query->bindValue(5, 0);
     $query->bindValue(6, $auth_key);
-    $query->bindValue(7, md5($pwd));
+    $query->bindValue(7, $password_hash);
     $query->bindValue(8, "not set yet");
     $query->bindValue(9, $time);
     $query->bindValue(10, $time);

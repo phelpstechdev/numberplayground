@@ -3,21 +3,21 @@ session_start();
 include_once("includes/connect.php");
 if (isset($_POST['login'])) {
   $username = $_POST['username'];
-  $password = md5($_POST['password']);
+  $password = $_POST['password'];
 
-  $query = $pdo->prepare("SELECT * FROM user WHERE username = ? AND password_hash = ?");
+  $query = $pdo->prepare("SELECT * FROM user WHERE username = ?");
   $query->bindValue(1, $username);
-  $query->bindValue(2, $password);
   $query->execute();
 
-  $num = $query->rowCount();
+  $result = $query->fetch(PDO::FETCH_ASSOC);
 
-  if ($num != 1) {
+  if (!password_verify($password, $result['password_hash'])) {
     $error = "Username or Password Incorrect";
+  } else if ($result['auth_key'] != "verified") {
+    $error = "You must first verify your email.";
   } else {
-    $user = $query->fetch(PDO::FETCH_ASSOC);
     $_SESSION['logged_in'] = true;
-    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['user_id'] = $result['id'];
     header("Location: index.php");
     exit();
   }
