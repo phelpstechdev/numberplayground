@@ -1,7 +1,5 @@
 <?php
-ini_set("include_path", '/home/goleuwupz58z/php:' . ini_get("include_path") );
 require_once("Mail.php");
-
 class Data {
   public function userExists($username) {
     global $pdo;
@@ -18,53 +16,6 @@ class Data {
       return true;
     }
 
-  }
-  
-  public function emailExists($email) {
-      global $pdo;
-      
-      $query = $pdo->prepare("SELECT * FROM email WHERE email = ?");
-      $query->bindValue(1, $email);
-      $query->execute();
-      
-      $num = $query->rowCount();
-      
-      if ($num != 1) {
-          return false;
-      } else {
-          return true;
-      }
-      
-  }
-  
-  public function googleUserExists($email, $fname, $lname) {
-      global $pdo;
-      
-      $query = $pdo->prepare("SELECT * FROM user WHERE username = ? AND firstname = ? AND lastname = ?");
-      $query->bindValue(1, $email);
-      $query->bindValue(2, $fname);
-      $query->bindValue(3, $lname);
-      $query->execute();
-      
-      $num = $query->rowCount();
-      
-      if ($num != 1) {
-          return false;
-      } else {
-          return true;
-      }
-  }
-  
-  public function getGoogleUser($email, $fname, $lname) {
-      global $pdo;
-      
-      $query = $pdo->prepare("SELECT * FROM user WHERE username = ? AND firstname = ? AND lastname = ?");
-      $query->bindValue(1, $email);
-      $query->bindValue(2, $fname);
-      $query->bindValue(3, $lname);
-      $query->execute();
-      
-      return $query->fetch();
   }
 
   public function getUserInfo($id) {
@@ -190,7 +141,21 @@ class Data {
     return $query->fetchAll();
   }
 
-  public function uploadFile($file) {
+  public function uploadjsFile($file) {
+    $target_dir = "../../js/";
+    $file_name = uniqid();
+    $file_type = strtolower(pathinfo($file['name'],PATHINFO_EXTENSION));
+    $target_file = $target_dir . $file_name . "." . $file_type;
+
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
+      return $target_file;
+    } else {
+      return "Failure";
+    }
+
+  }
+
+  public function uploadimageFile($file) {
     $target_dir = "../../images/";
     $file_name = uniqid();
     $file_type = strtolower(pathinfo($file['name'],PATHINFO_EXTENSION));
