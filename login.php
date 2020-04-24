@@ -29,6 +29,8 @@ if (isset($_POST['login'])) {
   <title>Number Playground | Log in</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/main.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="811519910005-mgi1lgkvpjfr7mk2gbqmh7i10e49sckj.apps.googleusercontent.com">
   <style>
   * {
     font-family: Arial;
@@ -43,7 +45,8 @@ if (isset($_POST['login'])) {
           <div class="grid-column-1 grid-row-1 phone-grid-column-1-2">
             <form action="login.php" method="post">
               <h1>Log In</h1>
-              <p class="text-red"><?php if (isset($error)) { echo $error; } ?></p>
+              <div class="g-signin2" data-theme="dark" data-longtitle="true" data-onsuccess="onSignIn"></div>
+              <p class="text-red" id="error"><?php if (isset($error)) { echo $error; } ?></p>
               <label for="username">Username</label>
               <input type="text" name="username" placeholder="Username...">
               <label for="password">Password</label>
@@ -62,5 +65,21 @@ if (isset($_POST['login'])) {
       </div>
     </div>
   </div>
+  <script>
+    function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'googleSignIn.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+          if (xhr.responseText == "success") {
+              window.location.href = "https://www.phelpstechdev.com/apps/numberplayground";
+          } else {
+              document.getElementById("error").innerText = xhr.responseText;
+          }
+        };
+        xhr.send('idtoken=' + id_token);
+    }
+    </script>
 </body>
 </html>

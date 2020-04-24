@@ -1,0 +1,30 @@
+[15-Apr-2020 21:13:58 UTC] PHP Fatal error:  Uncaught InvalidArgumentException: invalid json token in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php:446
+Stack trace:
+#0 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(26): Google_Client->setAccessToken(NULL)
+#1 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(63): getClient()
+#2 {main}
+  thrown in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php on line 446
+[15-Apr-2020 21:13:59 UTC] PHP Fatal error:  Uncaught InvalidArgumentException: invalid json token in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php:446
+Stack trace:
+#0 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(26): Google_Client->setAccessToken(NULL)
+#1 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(63): getClient()
+#2 {main}
+  thrown in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php on line 446
+[15-Apr-2020 21:14:00 UTC] PHP Fatal error:  Uncaught InvalidArgumentException: invalid json token in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php:446
+Stack trace:
+#0 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(26): Google_Client->setAccessToken(NULL)
+#1 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(63): getClient()
+#2 {main}
+  thrown in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php on line 446
+[15-Apr-2020 21:14:01 UTC] PHP Fatal error:  Uncaught InvalidArgumentException: invalid json token in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php:446
+Stack trace:
+#0 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(26): Google_Client->setAccessToken(NULL)
+#1 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(63): getClient()
+#2 {main}
+  thrown in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php on line 446
+[15-Apr-2020 21:14:01 UTC] PHP Fatal error:  Uncaught InvalidArgumentException: invalid json token in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php:446
+Stack trace:
+#0 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(26): Google_Client->setAccessToken(NULL)
+#1 /home/goleuwupz58z/public_html/apps/numberplayground/test/google/classroom/test.php(63): getClient()
+#2 {main}
+  thrown in /home/goleuwupz58z/public_html/apps/numberplayground/assets/api/google-php/src/Google/Client.php on line 446

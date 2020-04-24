@@ -1,5 +1,6 @@
 <?php
-require_once "Mail.php";
+ini_set("include_path", '/home/goleuwupz58z/php:' . ini_get("include_path") );
+require_once("Mail.php");
 
 $from = "wmpaulphelps@gmail.com";
 $to = 'williampaul@phelpsfamily.org';
@@ -7,7 +8,7 @@ $to = 'williampaul@phelpsfamily.org';
 $host = "ssl://smtp.gmail.com";
 $port = "465";
 $username = 'wmpaulphelps@gmail.com';
-$password = 's@s@beth';
+$password = 'My name is William Phelps and I am a web developer.';
 
 $subject = "test";
 $body = "test";
