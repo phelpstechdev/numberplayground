@@ -141,7 +141,21 @@ class Data {
     return $query->fetchAll();
   }
 
-  public function uploadFile($file) {
+  public function uploadjsFile($file) {
+    $target_dir = "../../js/";
+    $file_name = uniqid();
+    $file_type = strtolower(pathinfo($file['name'],PATHINFO_EXTENSION));
+    $target_file = $target_dir . $file_name . "." . $file_type;
+
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
+      return $target_file;
+    } else {
+      return "Failure";
+    }
+
+  }
+
+  public function uploadimageFile($file) {
     $target_dir = "../../images/";
     $file_name = uniqid();
     $file_type = strtolower(pathinfo($file['name'],PATHINFO_EXTENSION));

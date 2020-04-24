@@ -16,8 +16,8 @@ if (isset($_SESSION['user_id'])) {
     $class = $_POST['class'];
     $javascriptFile = $_FILES['javascriptFile'];
     $imageFile = $_FILES['imageFile'];
-    $jF_upload = $data->uploadFile($javascriptFile);
-    $iF_upload = $data->uploadFile($imageFile);
+    $jF_upload = $data->uploadjsFile($javascriptFile);
+    $iF_upload = $data->uploadimageFile($imageFile);
 
     echo $name;
     echo $class;
